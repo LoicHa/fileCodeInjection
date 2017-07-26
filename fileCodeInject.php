@@ -13,14 +13,16 @@ class FileCodeInject
 	function __construct($file)
 	{
 		if(file_exists($file))
+		{
 			$this->filename = $file;
+			$this->filenameContent = self::getContent();
+			return $this->filenameContent;
+		}
 	}
-	
 	
 	public function getContent()
 	{
-		$this->filenameContent = file_get_contents($this->filename);
-		return $this->filenameContent;
+		return file_get_contents($this->filename);
 	}
 	
 	public function injectCode($code, $find, $position = 'before', $append = true, $newline = true)
